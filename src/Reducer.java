@@ -1,19 +1,23 @@
+import java.util.ArrayList;
+
 public class Reducer {
 
-    Kattio io = new Kattio(System.in, System.out);
+    Kattio io;
     private int v, e, c, nORoles, nOScenes, nOactors;
     private Edge[] edges;
 
     public static void main(String[] args) {
-        Reducer reducer = new Reducer();
+        Kattio io = new Kattio(System.in, System.out);
+        Reducer reducer = new Reducer(io);
         reducer.print();
-
     }
 
 
 
-    public Reducer(){
+    public Reducer(Kattio io){
+        this.io = io;
         read();
+
     }
 
     private void read(){
@@ -22,9 +26,18 @@ public class Reducer {
         c = io.getInt();
 
         edges = new Edge[e];
+        ArrayList<Integer> nonSoloVerticies = new ArrayList<>();
         for (int i = 0; i < e; i++) {
-            edges[i] = new Edge(io.getInt(), io.getInt());
+            int a = io.getInt();
+            int b = io.getInt();
+            if (!nonSoloVerticies.contains(a))
+                nonSoloVerticies.add(a);
+            if (!nonSoloVerticies.contains(b))
+                nonSoloVerticies.add(b);
+
+            edges[i] = new Edge(a, b);
         }
+        v = nonSoloVerticies.size();
     }
 
     private void print(){
@@ -32,35 +45,37 @@ public class Reducer {
         nOScenes = e + 2;
         nOactors = c + 3;
 
-        System.out.println(nORoles);
-        System.out.println(nOScenes);
-        System.out.println(nOactors);
+        io.println(nORoles);
+        io.println(nOScenes);
+        io.println(nOactors);
+
 
         //Roles
 
         //Divor
-        System.out.println(1 + " " + 1);
-        System.out.println(2 + " " + 2);
-        System.out.println(3 + " " + 3);
+        io.println(1 + " " + 1);
+        io.println(1 + " " + 2);
+        io.println(1 + " " + 3);
 
         //Alla Andra
         for (int i = 0; i < v; i++){
-            System.out.print(c);
+            io.print(c);
             for (int j = 4; j <= nOactors; j++) {
-                System.out.print(" " + j);
+                io.print(" " + j);
             }
-            System.out.println();
+            io.println();
         }
 
         //Scenes
 
         //Divor
-        System.out.println(2+ " " + 1+ " " + 3);
-        System.out.println(2+ " " + 2+ " " + 3);
+        io.println(2 + " " + 1 + " " + 3);
+        io.println(2 + " " + 2 + " " + 3);
 
         //Alla andra
         for (Edge edge : edges) {
-            System.out.println(2 + " " + (edge.getA() + 3) + " " + (edge.getB() + 3));
+            io.println(2 + " " + (edge.getA() + 3) + " " + (edge.getB() + 3));
         }
+        io.flush();
     }
 }
