@@ -92,5 +92,3 @@ public class Kattio extends PrintWriter {
         return ans;
     }
 }
-
-

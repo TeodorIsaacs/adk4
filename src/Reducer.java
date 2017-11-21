@@ -39,9 +39,9 @@ public class Reducer {
         //Roles
 
         //Divor
-        System.out.println("1 1");
-        System.out.println("2 2");
-        System.out.println("3 3");
+        System.out.println(1 + " " + 1);
+        System.out.println(2 + " " + 2);
+        System.out.println(3 + " " + 3);
 
         //Alla Andra
         for (int i = 0; i < v; i++){
@@ -55,12 +55,12 @@ public class Reducer {
         //Scenes
 
         //Divor
-        System.out.println("2 1 3");
-        System.out.println("2 2 3");
+        System.out.println(2+ " " + 1+ " " + 3);
+        System.out.println(2+ " " + 2+ " " + 3);
 
         //Alla andra
         for (Edge edge : edges) {
-            System.out.println("2 " + (edge.getA() + 3) + " " + (edge.getB() + 3));
+            System.out.println(2 + " " + (edge.getA() + 3) + " " + (edge.getB() + 3));
         }
     }
 }
