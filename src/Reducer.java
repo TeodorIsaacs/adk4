@@ -27,15 +27,12 @@ public class Reducer {
 
         edges = new Edge[e];
         nonSoloVerticies = new ArrayList<>();
-        for (int i = 0; i < e; i++) {
+        int[] edgesList = new int[e*2];
+        for (int i = 0; i < e * 2; i++) {
             int a = io.getInt();
-            int b = io.getInt();
             if (!nonSoloVerticies.contains(a))
                 nonSoloVerticies.add(a);
-            if (!nonSoloVerticies.contains(b))
-                nonSoloVerticies.add(b);
-
-            edges[i] = new Edge(a, b);
+            edgesList[i] = a;
         }
 
         int sub = 0;
@@ -47,9 +44,9 @@ public class Reducer {
             }
             typHash.add(i - sub);
         }
-        for (Edge edge : edges) {
-            edge.setA(typHash.get(edge.getA()));
-            edge.setB(typHash.get(edge.getB()));
+
+        for (int i = 0; i < e * 2; i +=2) {
+            edges[i/2] = new Edge(typHash.get(edgesList[i]), typHash.get(edgesList[i+1]));
         }
 
         v = nonSoloVerticies.size();
