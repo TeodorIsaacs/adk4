@@ -5,6 +5,7 @@ public class Reducer {
     Kattio io;
     private int v, e, c, nORoles, nOScenes, nOactors;
     private Edge[] edges;
+    private ArrayList<Integer> nonSoloVerticies;
 
     public static void main(String[] args) {
         Kattio io = new Kattio(System.in, System.out);
@@ -13,20 +14,19 @@ public class Reducer {
     }
 
 
-
-    public Reducer(Kattio io){
+    public Reducer(Kattio io) {
         this.io = io;
         read();
 
     }
 
-    private void read(){
+    private void read() {
         v = io.getInt();
         e = io.getInt();
         c = io.getInt();
 
         edges = new Edge[e];
-        ArrayList<Integer> nonSoloVerticies = new ArrayList<>();
+        nonSoloVerticies = new ArrayList<>();
         for (int i = 0; i < e; i++) {
             int a = io.getInt();
             int b = io.getInt();
@@ -37,10 +37,25 @@ public class Reducer {
 
             edges[i] = new Edge(a, b);
         }
+
+        int sub = 0;
+        ArrayList<Integer> typHash = new ArrayList<>();
+        typHash.add(0);
+        for (int i = 1; i <= v; i++) {
+            if (!nonSoloVerticies.contains(i)) {
+                sub++;
+            }
+            typHash.add(i - sub);
+        }
+        for (Edge edge : edges) {
+            edge.setA(typHash.get(edge.getA()));
+            edge.setB(typHash.get(edge.getB()));
+        }
+
         v = nonSoloVerticies.size();
     }
 
-    private void print(){
+    private void print() {
         nORoles = v + 3;
         nOScenes = e + 2;
         nOactors = c + 3;
@@ -58,7 +73,7 @@ public class Reducer {
         io.println(1 + " " + 3);
 
         //Alla Andra
-        for (int i = 0; i < v; i++){
+        for (int i = 0; i < v; i++) {
             io.print(c);
             for (int j = 4; j <= nOactors; j++) {
                 io.print(" " + j);
