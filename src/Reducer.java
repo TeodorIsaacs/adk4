@@ -18,49 +18,69 @@ public class Reducer {
         read();
 
     }
+    private void printbaseGOOD(){
+        io.println(3);
+        io.println(2);
+        io.println(3
+        printDivaRoles();
+        printDivaScenes();
+    }
 
     private void read() {
         v = io.getInt();
         e = io.getInt();
         c = io.getInt();
-        boi = new StringBuilder();
-        nonSoloVerticies = new ArrayList<>();
-        int[] edgesList = new int[e * 2];
-
-        for (int i = 0; i < e * 2; i++) {
-            int a = io.getInt();
-            if (!nonSoloVerticies.contains(a))
-                nonSoloVerticies.add(a);
-            edgesList[i] = a;
+        if (c >= v){
+            printbaseGOOD();
         }
-        int oldV = v;
-        v = nonSoloVerticies.size();
-        nORoles = v + 3;
-        nOScenes = e + 2;
-        nOactors = c + 3;
+        else {
+            boi = new StringBuilder();
+            nonSoloVerticies = new ArrayList<>();
+            int[] edgesList = new int[e * 2];
 
-        printFirstThree();
-        printDivaRoles();
-
-        printRoles();
-        ArrayList<Integer> typHash = new ArrayList<>();
-        typHash.add(0);
-        int sub = 0;
-        for (int i = 1; i <= oldV; i++) {
-            if (!nonSoloVerticies.contains(i)) {
-                sub++;
+            for (int i = 0; i < e * 2; i++) {
+                int a = io.getInt();
+                if (!nonSoloVerticies.contains(a))
+                    nonSoloVerticies.add(a);
+                edgesList[i] = a;
             }
-            typHash.add(i - sub);
-        }
-        printDivaScenes();
-        ArrayList<Edge> uniqueEdges = new ArrayList<>();
-        int a, b;
-        for (int i = 0; i < e * 2; i += 2) {
-            a = typHash.get(edgesList[i]);
-            b = typHash.get(edgesList[i + 1]);
-            if (!containsEdge(uniqueEdges, a, b)) {
-                printScene(a, b);
-                uniqueEdges.add(new Edge(a, b));
+            int oldV = v;
+            v = nonSoloVerticies.size();
+            nORoles = v + 3;
+            nOScenes = e + 2;
+            nOactors = c + 3;
+
+
+            ArrayList<Integer> typHash = new ArrayList<>();
+            typHash.add(0);
+            int sub = 0;
+            for (int i = 1; i <= oldV; i++) {
+                if (!nonSoloVerticies.contains(i)) {
+                    sub++;
+                }
+                typHash.add(i - sub);
+            }
+
+            ArrayList<Edge> uniqueEdges = new ArrayList<>();
+            int nonUniqueEdges = 0;
+            int a, b;
+            for (int i = 0; i < e * 2; i += 2) {
+                a = typHash.get(edgesList[i]);
+                b = typHash.get(edgesList[i + 1]);
+                if (!containsEdge(uniqueEdges, a, b)) {
+                    uniqueEdges.add(new Edge(a, b));
+                } else {
+                    nonUniqueEdges++;
+                }
+            }
+            nOScenes -= nonUniqueEdges;
+            printFirstThree();
+            printDivaRoles();
+            printRoles();
+            printDivaScenes();
+            for (Edge edge :
+                    uniqueEdges) {
+                printScene(edge.getA(), edge.getB());
             }
         }
         io.flush();
