@@ -6,6 +6,7 @@ public class Reducer {
     private int v, e, c, nORoles, nOScenes, nOactors;
     private ArrayList<Integer> nonSoloVerticies;
     private StringBuilder boi;
+
     public static void main(String[] args) {
         Kattio io = new Kattio(System.in, System.out);
         Reducer reducer = new Reducer(io);
@@ -37,13 +38,14 @@ public class Reducer {
         nORoles = v + 3;
         nOScenes = e + 2;
         nOactors = c + 3;
+
         printFirstThree();
         printDivaRoles();
 
         printRoles();
-        int sub = 0;
         ArrayList<Integer> typHash = new ArrayList<>();
         typHash.add(0);
+        int sub = 0;
         for (int i = 1; i <= oldV; i++) {
             if (!nonSoloVerticies.contains(i)) {
                 sub++;

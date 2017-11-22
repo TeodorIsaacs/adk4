@@ -21,4 +21,12 @@ public class Edge {
     public void setB(int b){
         this.b = b;
     }
+
+    public boolean checkEquality(int a, int b){
+        if((this.a == a && this.b == b) || (this.a == b && this.b == a)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
