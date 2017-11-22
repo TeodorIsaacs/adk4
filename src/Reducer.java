@@ -65,7 +65,6 @@ public class Reducer {
     }
 
     private void printScene(int a, int b){
-
         io.println(2 + " " + (a + 3) + " " + (b + 3));
     }
     private void printDivaScenes(){
@@ -80,7 +79,7 @@ public class Reducer {
     }
     private void printRoles(){
         for (int i = 0; i < v; i++) {
-
+            boi.setLength(0);
             boi.append(c);
             for (int j = 4; j <= nOactors; j++) {
                 boi.append(" ");
