@@ -78,13 +78,13 @@ public class Reducer {
         io.println(nOactors);
     }
     private void printRoles(){
+        boi.setLength(0);
+        boi.append(c);
+        for (int i = 4; i <= nOactors; i++) {
+            boi.append(" ");
+            boi.append(i);
+        }
         for (int i = 0; i < v; i++) {
-            boi.setLength(0);
-            boi.append(c);
-            for (int j = 4; j <= nOactors; j++) {
-                boi.append(" ");
-                boi.append(j);
-            }
             io.println(boi);
         }
     }
