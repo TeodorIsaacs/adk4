@@ -25,7 +25,7 @@ public class Reducer {
         c = io.getInt();
         boi = new StringBuilder();
         nonSoloVerticies = new ArrayList<>();
-        int[] edgesList = new int[e*2];
+        int[] edgesList = new int[e * 2];
 
         for (int i = 0; i < e * 2; i++) {
             int a = io.getInt();
@@ -53,33 +53,53 @@ public class Reducer {
             typHash.add(i - sub);
         }
         printDivaScenes();
-
-        for (int i = 0; i < e * 2; i +=2) {
-            printScene(typHash.get(edgesList[i]), typHash.get(edgesList[i+1]));
+        ArrayList<Edge> uniqueEdges = new ArrayList<>();
+        int a, b;
+        for (int i = 0; i < e * 2; i += 2) {
+            a = typHash.get(edgesList[i]);
+            b = typHash.get(edgesList[i + 1]);
+            if (!containsEdge(uniqueEdges, a, b)) {
+                printScene(a, b);
+                uniqueEdges.add(new Edge(a, b));
+            }
         }
         io.flush();
     }
 
-    private void printDivaRoles(){
+    private boolean containsEdge(ArrayList<Edge> list, int a, int b) {
+        for (Edge edge : list) {
+            if (edge.getA() == a && edge.getB() == b) {
+                return true;
+            }
+            if (edge.getA() == b && edge.getB() == a) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void printDivaRoles() {
         io.println(1 + " " + 1);
         io.println(1 + " " + 2);
         io.println(1 + " " + 3);
     }
 
-    private void printScene(int a, int b){
+    private void printScene(int a, int b) {
         io.println(2 + " " + (a + 3) + " " + (b + 3));
     }
-    private void printDivaScenes(){
+
+    private void printDivaScenes() {
         io.println(2 + " " + 1 + " " + 3);
         io.println(2 + " " + 2 + " " + 3);
     }
 
-    private void printFirstThree(){
+    private void printFirstThree() {
         io.println(nORoles);
         io.println(nOScenes);
         io.println(nOactors);
     }
-    private void printRoles(){
+
+    private void printRoles() {
         boi.setLength(0);
         boi.append(c);
         for (int i = 4; i <= nOactors; i++) {
