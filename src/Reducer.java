@@ -15,41 +15,43 @@ public class Reducer {
 
     public Reducer(Kattio io) {
         this.io = io;
-        read();
+        bigBOI();
 
     }
-    private void printbaseGOOD(){
-        io.println(3);
-        io.println(2);
-        io.println(3
+
+    private void printbaseGOOD() {
+        io.println(3+"\n"+2+"\n"+3);
         printDivaRoles();
         printDivaScenes();
+        io.flush();
     }
 
-    private void read() {
+    private void bigBOI() {
         v = io.getInt();
         e = io.getInt();
         c = io.getInt();
-        if (c >= v){
+        boi = new StringBuilder();
+        if (c >= v) {
             printbaseGOOD();
-        }
-        else {
-            boi = new StringBuilder();
+        } else {
             nonSoloVerticies = new ArrayList<>();
             int[] edgesList = new int[e * 2];
 
-            for (int i = 0; i < e * 2; i++) {
+            for (int i = 0; i < e * 2; i += 2) {
                 int a = io.getInt();
+                int b = io.getInt();
                 if (!nonSoloVerticies.contains(a))
                     nonSoloVerticies.add(a);
+                if (!nonSoloVerticies.contains(b))
+                    nonSoloVerticies.add(b);
                 edgesList[i] = a;
+                edgesList[i + 1] = b;
             }
             int oldV = v;
             v = nonSoloVerticies.size();
             nORoles = v + 3;
             nOScenes = e + 2;
             nOactors = c + 3;
-
 
             ArrayList<Integer> typHash = new ArrayList<>();
             typHash.add(0);
@@ -82,8 +84,8 @@ public class Reducer {
                     uniqueEdges) {
                 printScene(edge.getA(), edge.getB());
             }
+            io.flush();
         }
-        io.flush();
     }
 
     private boolean containsEdge(ArrayList<Edge> list, int a, int b) {
@@ -99,9 +101,19 @@ public class Reducer {
     }
 
     private void printDivaRoles() {
-        io.println(1 + " " + 1);
-        io.println(1 + " " + 2);
-        io.println(1 + " " + 3);
+        boi.setLength(0);
+        boi.append(1);
+        boi.append(" ");
+        boi.append(1);
+        boi.append("\n");
+        boi.append(1);
+        boi.append(" ");
+        boi.append(2);
+        boi.append("\n");
+        boi.append(1);
+        boi.append(" ");
+        boi.append(3);
+        io.println(boi);
     }
 
     private void printScene(int a, int b) {
@@ -109,6 +121,8 @@ public class Reducer {
     }
 
     private void printDivaScenes() {
+        boi.setLength(0);
+
         io.println(2 + " " + 1 + " " + 3);
         io.println(2 + " " + 2 + " " + 3);
     }
