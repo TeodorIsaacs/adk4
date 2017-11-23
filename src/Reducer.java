@@ -80,8 +80,7 @@ public class Reducer {
             printDivaRoles();
             printRoles();
             printDivaScenes();
-            for (Edge edge :
-                    uniqueEdges) {
+            for (Edge edge : uniqueEdges) {
                 printScene(edge.getA(), edge.getB());
             }
             io.flush();
@@ -117,12 +116,16 @@ public class Reducer {
     }
 
     private void printScene(int a, int b) {
-        io.println(2 + " " + (a + 3) + " " + (b + 3));
+        boi.setLength(0);
+        boi.append(2);
+        boi.append(" ");
+        boi.append(a+3);
+        boi.append(" ");
+        boi.append(b+3);
+        io.println(boi);
     }
 
     private void printDivaScenes() {
-        boi.setLength(0);
-
         io.println(2 + " " + 1 + " " + 3);
         io.println(2 + " " + 2 + " " + 3);
     }
