@@ -47,16 +47,13 @@ public class Reducer {
                 edgesList[i] = a;
                 edgesList[i + 1] = b;
             }
-            int oldV = v;
-            v = nonSoloVerticies.size();
-            nORoles = v + 3;
-            nOScenes = e + 2;
-            nOactors = c + 3;
+
+
 
             ArrayList<Integer> typHash = new ArrayList<>();
             typHash.add(0);
             int sub = 0;
-            for (int i = 1; i <= oldV; i++) {
+            for (int i = 1; i <= v; i++) {
                 if (!nonSoloVerticies.contains(i)) {
                     sub++;
                 }
@@ -75,6 +72,11 @@ public class Reducer {
                     nonUniqueEdges++;
                 }
             }
+            v = nonSoloVerticies.size();
+            nORoles = v + 3;
+            nOScenes = e + 2;
+            nOactors = c + 3;
+
             nOScenes -= nonUniqueEdges;
             printFirstThree();
             printDivaRoles();
