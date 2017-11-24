@@ -6,6 +6,7 @@ public class Reducer {
     private int v, e, c, nORoles, nOScenes, nOactors;
     private ArrayList<Integer> nonSoloVerticies;
     private StringBuilder boi;
+    private boolean fuckedUp = false;
 
     public static void main(String[] args) {
         Kattio io = new Kattio(System.in, System.out);
@@ -31,7 +32,7 @@ public class Reducer {
         e = io.getInt();
         c = io.getInt();
         boi = new StringBuilder();
-        if (c >= v) {
+        if (c >= v || c > e) {
             printbaseGOOD();
         } else {
             nonSoloVerticies = new ArrayList<>();
@@ -47,8 +48,15 @@ public class Reducer {
                 edgesList[i] = a;
                 edgesList[i + 1] = b;
             }
-
-
+            /*
+            int[] degrees = new int[nonSoloVerticies.size() + 1];
+            degrees[a]++;
+            degrees[b]++;
+            if(degrees[a] > c || degrees[b] > c){
+                fuckedUp = true;
+                break;
+            }
+            */
 
             ArrayList<Integer> typHash = new ArrayList<>();
             typHash.add(0);
@@ -61,6 +69,7 @@ public class Reducer {
             }
 
             ArrayList<Edge> uniqueEdges = new ArrayList<>();
+
             int nonUniqueEdges = 0;
             int a, b;
             for (int i = 0; i < e * 2; i += 2) {
@@ -72,21 +81,38 @@ public class Reducer {
                     nonUniqueEdges++;
                 }
             }
-            v = nonSoloVerticies.size();
-            nORoles = v + 3;
-            nOScenes = e + 2;
-            nOactors = c + 3;
+            if (!fuckedUp) {
+                v = nonSoloVerticies.size();
+                nORoles = v + 3;
+                nOScenes = e + 2;
+                nOactors = c + 3;
 
-            nOScenes -= nonUniqueEdges;
-            printFirstThree();
-            printDivaRoles();
-            printRoles();
-            printDivaScenes();
-            for (Edge edge : uniqueEdges) {
-                printScene(edge.getA(), edge.getB());
+                nOScenes -= nonUniqueEdges;
+                printFirstThree();
+                printDivaRoles();
+                printRoles();
+                printDivaScenes();
+                for (Edge edge : uniqueEdges) {
+                    printScene(edge.getA(), edge.getB());
+                }
+            } else {
+                printbaseBad();
             }
             io.flush();
         }
+    }
+
+    private void printbaseBad() {
+        boi.setLength(0);
+        boi.append(1);
+        boi.append(" ");
+        boi.append(1);
+        boi.append("\n");
+        boi.append(1);
+        boi.append(" ");
+        boi.append(2);
+        io.println(boi);
+        io.println(2 + " " + 1 + " " + 3);
     }
 
     private boolean containsEdge(ArrayList<Edge> list, int a, int b) {
