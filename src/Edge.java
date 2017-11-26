@@ -32,7 +32,9 @@ public class Edge {
 
     @Override
     public int hashCode() {
-        int hash = ((a + b) * (a + b + 1) / 2) + b;
+        int max = Math.max(a, b);
+        int min = Math.min(a, b);
+        int hash = ((max + min) * (max + min + 1) / 2) + min;
         return hash;
     }
 
